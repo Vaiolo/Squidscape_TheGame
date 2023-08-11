@@ -12,16 +12,25 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 public class BaseActor extends Actor {
     private Animation<TextureRegion> animation;
     private float elTime;
-    protected Vector2 velocity;
+    protected Vector2 vectorVelocity;
+    protected Vector2 vectorAcceleration;
     private float acc;
+    private float dec;
+    private float maxSpeed;
 
     public BaseActor(float x, float y, Stage s) {
         super();
         setPosition(x, y);
         s.addActor(this);
+
+        animation = null;
         elTime = 0.0F;
-        velocity = new Vector2(0, 0);
+        elTime = 0.0F;
+        vectorVelocity = new Vector2(0, 0);
+        vectorAcceleration = new Vector2(0,0);
+        maxSpeed = 1000.0F;
         acc = 0.0F;
+        dec = 0.0F;
     }
 
     public void centerAtPosition(float x, float y) {
@@ -61,5 +70,42 @@ public class BaseActor extends Actor {
                     getX(), getY(), getOriginX(), getOriginY(),
                     getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
         }
+    }
+
+    //Getters
+    public float getSpeed()
+    {
+        return vectorVelocity.len();
+    }
+
+    //Setters
+    public void setMaxSpeed(float maxSp)
+    {
+        maxSpeed = maxSp;
+    }
+
+    public void setSpeed(float speed)
+    {
+        if (vectorVelocity.len() == 0)
+        {
+            vectorVelocity.set(speed,0);
+        } else {
+            vectorVelocity.setLength(speed);
+        }
+    }
+
+    public void setAcceleration(float acceleration)
+    {
+        acc = acceleration;
+    }
+
+    public void setDeceleration(float deceleration)
+    {
+        dec = deceleration;
+    }
+
+    public void accelerateAngle(float angle)
+    {
+        vectorAcceleration.add(new Vector2(acc, 0).setAngleDeg(angle));
     }
 }
