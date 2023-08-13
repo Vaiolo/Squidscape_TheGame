@@ -1,4 +1,5 @@
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -17,6 +18,8 @@ public class BaseActor extends Actor {
     private float acc;
     private float dec;
     private float maxSpeed;
+    private static Rectangle bounds;
+    private Rectangle boundaryRectangle;
 
     public BaseActor(float x, float y, Stage s) {
         super();
@@ -24,7 +27,6 @@ public class BaseActor extends Actor {
         s.addActor(this);
 
         animation = null;
-        elTime = 0.0F;
         elTime = 0.0F;
         vectorVelocity = new Vector2(0, 0);
         vectorAcceleration = new Vector2(0,0);
@@ -107,5 +109,19 @@ public class BaseActor extends Actor {
     public void accelerateAngle(float angle)
     {
         vectorAcceleration.add(new Vector2(acc, 0).setAngleDeg(angle));
+    }
+
+    public static void setBounds(float width, float height)
+    {
+        bounds = new Rectangle(0,0,width,height);
+    }
+
+    public void setBoundaryRectangle() {
+        if (bounds == null) {
+            throw new IllegalStateException("Bounds must be set using setBounds method");
+        }
+        Rectangle rectangle = new Rectangle(getX(), getY(), getWidth(), getHeight());
+        rectangle.setPosition(getX(), getY());
+        boundaryRectangle = rectangle;
     }
 }

@@ -58,4 +58,19 @@ public class MainCharacter extends BaseActor{
 
         vectorAcceleration.add(0, -gravity);
     }
+
+    public void jump()
+    {
+        vectorVelocity.y = jumpSpeed;
+    }
+
+    public boolean isJumping()
+    {
+        return (vectorVelocity.y > 0); //If the vector on y axis > 0, then the character is moving up in vertical
+    }
+
+    public boolean isFalling()
+    {
+        return (vectorVelocity.y < 0); //If the vector on y axis < 0, then the character is moving up in vertical
+    }
 }
