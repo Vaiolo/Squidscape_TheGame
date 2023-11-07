@@ -8,14 +8,11 @@ public abstract class BaseGame extends Game {
     {
         game = this;
     }
-    public void create()
-    {
-
-    }
 
     //Method to switch screens
     public static void setActiveScreen(BaseScreen s)
     {
         game.setScreen(s);
     }
+
 }

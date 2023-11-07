@@ -25,8 +25,9 @@ public class MenuScreen extends BaseScreen{
 
     @Override
     public void update(float dt) {
-        if (Gdx.input.isKeyPressed(Input.Keys.ENTER))
-            Squidscape.setActiveScreen( new LevelScreen() );
+        if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+            Squidscape.setActiveScreen(new LevelScreen());
+        }
     }
 
     @Override
